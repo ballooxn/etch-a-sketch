@@ -1,4 +1,6 @@
 const container = document.querySelector("#grid-container");
+const rainbow = document.querySelector("#rainbow");
+let isRainbow = false;
 
 
 function createGrid(size) {
@@ -22,17 +24,32 @@ function createRow(length) {
     }
 }
 
+rainbow.addEventListener("click", (e) => {
+    if (isRainbow) {
+        isRainbow = false;
+    }
+    else {
+        isRainbow = true;
+    }
+})
+
 // Change color when mouse is hovering over a unit
 function colorChange() {
     let units = document.querySelectorAll(".unit");
-    console.log(units);
 
     units.forEach(function(element) {
-        console.log("test");
         element.addEventListener("mouseover", (e) => {
-            e.target.style.backgroundColor = "black";
-            console.log("working");
+            if (isRainbow) {
+                e.target.style.backgroundColor = "rgb(" + randomColor() + ", " + randomColor() + ", " + randomColor() + ")";
+            }
+            else {
+                e.target.style.backgroundColor = "black";
+            }
         });
     });
 }
-createGrid(100);
+
+function randomColor() {
+    return Math.floor(Math.random() * 254);
+}
+createGrid(60);
