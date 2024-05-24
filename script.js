@@ -1,6 +1,8 @@
 const container = document.querySelector("#grid-container");
-const rainbow = document.querySelector("#rainbow");
+const rainbowButton = document.querySelector("#rainbow");
+const gridButton = document.querySelector("#grid-size");
 let isRainbow = false;
+let gridSize = 16;
 
 
 function createGrid(size) {
@@ -24,7 +26,18 @@ function createRow(length) {
     }
 }
 
-rainbow.addEventListener("click", (e) => {
+gridButton.addEventListener("click", (e) => {
+    size = prompt("Please enter a number between 1 and 100");
+    size = Number(size);
+    children = container.querySelectorAll(".row");
+    children.forEach((e) => {
+        e.remove();
+    });
+    createGrid(size);
+
+})
+
+rainbowButton.addEventListener("click", (e) => {
     if (isRainbow) {
         isRainbow = false;
     }
@@ -52,4 +65,4 @@ function colorChange() {
 function randomColor() {
     return Math.floor(Math.random() * 254);
 }
-createGrid(60);
+createGrid(16);
